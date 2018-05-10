@@ -8,8 +8,10 @@ def my_confusion(Ctrues, Cpreds):
     #   CM : K-by-K ndarray of confusion matrix, where CM[i,j] is the number of samples whose target is the ith class that was classified as j (dtype=np.int_)
     #   acc : accuracy (i.e. correct classification rate) (type=float)
 
-    # Initialisation of confusion matrix
+    # Number of samples
     N = Cpreds.shape[0]
+
+    # Initialisation of confusion matrix
     K = 26
     CM = np.zeros((K, K))
 
