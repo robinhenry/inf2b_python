@@ -29,10 +29,10 @@ def my_bnb_classify(Xtrn, Ctrn, Xtst, threshold):
         # Select training samples from class k and 1 row in case there is only 1 training sample (just in case)
         Xtrn_k = np.concatenate((Xtrn_bin[(Ctrn == k)[:,0], :], np.zeros((1,D))))
         # Number of samples of class k
-        nbr_samples_k = Xtrn_k.shape[0]
-        nbr_samples_k = Xtrn_k.shape[0] 
+        nbr_samples_k = Xtrn_k.shape[0] - 1
         # P(D_i = 0|C_k), where D_i is the ith element of a feature vector D
-        trn_zeros[k,:] = np.sum(Xtrn_k == 0, axis=0) / nbr_samples_k
+        trn_zeros[k,:] = (np.sum(Xtrn_k == 0, axis=0) - 1) / nbr_samples_k
+        trn_ones[k,:] = np.sum(Xtrn_k == 1, axis=0) / nbr_samples_k
 
         # Compute the likelihoods
         factor_0 = np.power(trn_zeros[k,:], (1 - Xtst_bin))
