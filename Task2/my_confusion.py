@@ -1,12 +1,3 @@
-#
-# A sample template for my_confusion.py
-#
-# Note that:
-#   We assume that the original labels have been pre-processed so that
-#   class number starts at 0 rather than 1 to meet the NumPy's array indexing
-#   policy. For example, if the number of classes is K, label values are in
-#   [0,K-1] range. (This conversion does not apply to codig wih Matlab)
-
 import numpy as np
 
 def my_confusion(Ctrues, Cpreds):
@@ -16,6 +7,25 @@ def my_confusion(Ctrues, Cpreds):
     # Output:
     #   CM : K-by-K ndarray of confusion matrix, where CM[i,j] is the number of samples whose target is the ith class that was classified as j (dtype=np.int_)
     #   acc : accuracy (i.e. correct classification rate) (type=float)
-    #
+
+    # Number of samples
+    N = Cpreds.shape[0]
+
+    # Initialisation of confusion matrix
+    K = 26
+    CM = np.zeros((K, K))
+
+    # Iterate over each class
+    for k in range(0,K):
+        # Compute vector of predictions corresponding to truth of class k
+        select = Ctrues == k
+        select.shape = N
+        preds = Cpreds[select].astype(dtype=np.int64)
+        # Increment the kth row (samples that should be of class k) in CM
+        for j in preds:
+            CM[k,j] = CM[k,j] + 1
+    
+    # Compute accuracy
+    acc = np.trace(CM) / Ctrues.shape[0]
 
     return (CM, acc)
