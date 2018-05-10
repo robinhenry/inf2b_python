@@ -25,7 +25,7 @@ def my_gaussian_classify(Xtrn, Ctrn, Xtst, epsilon):
     Ms = np.zeros((D, K))
     Covs = np.zeros((D, D, K))
     for k in range(0, K):
-        samples = Xtrn[Ctrn == k, :]
+        samples = Xtrn[(Ctrn == k)[:,0], :]
         mu = myMean(samples)
         Ms[:, k] = mu
         Covs[:, :, k] = myCov(samples, mu) + np.eye(D) * epsilon
@@ -38,8 +38,8 @@ def my_gaussian_classify(Xtrn, Ctrn, Xtst, epsilon):
     for k in range(0, K):
         mu = Ms[:,k]
         sigma = Covs[:,:,k]
-        diff = Xtst.T - mu
-        pro = np.dot( np.dot(diff.T, np.inv(sigma)), diff )
+        diff = Xtst.T - mu[:, np.newaxis]
+        pro = np.dot( np.dot(diff.T, np.linalg.inv(sigma)), diff )
         post_matrix = - 0.5 * pro - 0.5 * logdet(sigma)
         post_log[:,k] = np.diag(post_matrix)
 

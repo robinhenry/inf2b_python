@@ -11,7 +11,7 @@ def myCov(matrix, mu):
     L = matrix.shape[0]
 
     # Compute sample covariance matrix
-    diff = matrix.T - mu
+    diff = matrix.T - mu[:, np.newaxis]
     Covs = np.dot(diff, diff.T) / L
 
     return Covs
