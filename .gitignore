@@ -1,5 +1,6 @@
 data.mat
-cm*.npy
+Task1/cm*.npy
+Task2/cm*.npy
 launch.json
 *-36.pyc
 settings.json
