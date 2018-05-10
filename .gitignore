@@ -1,6 +1,6 @@
 data.mat
-Task1/cm*.npy
-Task2/cm*.npy
+Task1/*.npy
+Task2/*.npy
 Task3/*.npy
 launch.json
 *-36.pyc
